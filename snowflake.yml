@@ -1,0 +1,22 @@
+definition_version: 2
+entities:
+  value_realization_catalog:
+    type: streamlit
+    identifier:
+      name: VALUE_REALIZATION_CATALOG_APP
+      database: SALES
+      schema: SALES_ENGINEERING
+    title: "Value Realization Catalog"
+    query_warehouse: SNOWHOUSE
+    runtime_name: SYSTEM$ST_CONTAINER_RUNTIME_PY3_11
+    compute_pool: STREAMLIT_DEDICATED_POOL_L
+    main_file: streamlit_app.py
+    artifacts:
+      - streamlit_app.py
+      - .streamlit/config.toml
+      - static/Inter-Regular.ttf
+      - static/Inter-Medium.ttf
+      - static/Inter-SemiBold.ttf
+      - static/Inter-Bold.ttf
+      - static/JetBrainsMono-Regular.ttf
+      - static/JetBrainsMono-Medium.ttf
