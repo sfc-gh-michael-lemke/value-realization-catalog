@@ -1,34 +1,35 @@
 # Value Realization Catalog
 
-> A searchable, Snowflake-branded gallery of AI-extracted value stories across the SE portfolio.
+> Self-service library of SE value stories — searchable, filterable, and slide-ready.
 
-A [Streamlit-in-Snowflake](https://docs.snowflake.com/en/developer-guide/streamlit/about-streamlit) application for the Snowflake AFE and Sales Engineering team.
+A [Streamlit-in-Snowflake](https://docs.snowflake.com/en/developer-guide/streamlit/about-streamlit) application for Snowflake Sales Engineering and RevOps teams.
 
 ## What It Does
 
-Displays all value realization entries from `AFE.TEST.VALUE_REALIZATION_CATALOG` as a searchable, filterable card gallery. Each card shows capability chips, business challenge bullets, measured outcomes, and links to the rendered HTML slide. Built for SE field teams to quickly find relevant use cases before customer conversations.
+Snowflake-branded SiS app that surfaces all entries in `AFE.TEST.VALUE_REALIZATION_CATALOG` as an interactive card gallery. Each card shows capability chips, business outcomes, and a rendered HTML slide. The catalog is searchable and filterable so field SEs can quickly locate relevant use cases by industry, capability, or keyword — and share them directly from the app.
 
 ## Business Value
 
 | Benefit | Description |
 |---------|-------------|
-| Discovery speed | Find relevant use cases in seconds vs. searching Slack/emails |
-| Consistency | All assets share Snowflake branding and structured format |
-| Self-service | No RevOps or field-readiness ticket needed for use case assets |
-| Growing library | Automatically updated as new repos are processed by the Ingestor |
+| Instant discovery | Find a relevant customer use case in seconds instead of hunting through shared drives |
+| Always current | Catalog entries are live from Snowflake — new entries appear the moment they are ingested |
+| Field-ready assets | Each entry includes a rendered HTML slide that can be shared directly in customer conversations |
 
 ## Architecture
 
 | Component | Technology |
 |-----------|------------|
-| Frontend | Streamlit-in-Snowflake (dark Snowflake theme) |
+| Frontend | Streamlit-in-Snowflake |
 | Data source | `AFE.TEST.VALUE_REALIZATION_CATALOG` |
-| UI patterns | CSS card grid, capability chip tags, stat counters |
+| AI/ML | N/A (AI runs at ingest time via Value Realization Ingestor) |
 | Auth | Snowflake role-based access |
 
 ## Deployment
 
 Deployed on Snowflake as: `SALES.SALES_ENGINEERING.VALUE_REALIZATION_CATALOG_APP`
+
+### Deploy via Snowflake CLI
 
 ```bash
 snow streamlit deploy
@@ -37,7 +38,7 @@ snow streamlit deploy
 ## Local Development
 
 ```bash
-uv sync
+pip install -r requirements.txt  # or: uv sync
 streamlit run streamlit_app.py
 ```
 
@@ -47,14 +48,8 @@ streamlit run streamlit_app.py
 |---------|-------|
 | Warehouse | SNOWHOUSE |
 | Runtime | SYSTEM$ST_CONTAINER_RUNTIME_PY3_11 |
-| Compute Pool | STREAMLIT_DEDICATED_POOL_L |
-
-## Related Projects
-
-- [Value Realization Ingestor](https://github.com/sfc-gh-michael-lemke/value-realization-ingestor) — Populates the catalog from GitHub repos
-- [Value Realization App](https://github.com/sfc-gh-michael-lemke/value-realization-app) — Generates use case assets from customer stories
-- [value-realization-slide](https://github.com/sfc-gh-michael-lemke/value-realization-slide) — CoCo skill for generating individual slides
+| Compute Pool | STREAMLIT_DEDICATED_POOL |
 
 ## Value Realization
 
-The catalog closes the loop on the value realization pipeline: assets created by the Ingestor and App are surfaced here in a polished, searchable format. AEs and SEs can walk into customer conversations with relevant proof points at their fingertips — without asking RevOps, searching Confluence, or building slides from scratch.
+This catalog closes the loop on the value realization system: stories are created by the Value Realization App, ingested from GitHub by the Ingestor, and surfaced here for field consumption. It replaces informal tribal knowledge and scattered shared-drive assets with a structured, searchable library — turning the SE org's collective work into a compounding, reusable asset.
